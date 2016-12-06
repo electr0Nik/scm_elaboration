@@ -1,0 +1,98 @@
+% Festlegung des Allgemeinen Dokumentenformats
+\documentclass[
+a4paper, 			% Seitengröße
+12pt,					% Schriftgröße
+headsepline,	% Linie unter der Überschrift
+ngerman,			% weiterleitung von deutscher Gramatik an andere Pakete
+]{scrartcl} % mögliche Klassen: scrartcl, scrreprt, scrbook
+
+
+% auslagern der imports in extra config datei
+\input{../config/imports}
+
+% Kopf- und Fusszeile
+\input{../config/fancyHeaderAndFooter}
+
+% diverse Dokument Einstellungen
+% Einstellung für Seitenränder
+\geometry{left=3cm, right=2.5cm, top=2.5cm, bottom=3cm}
+
+% Indexerstellung
+\makeindex
+
+% Beginne Dokument
+\begin{document}
+	
+	% Leere Seite am Anfang
+	% \thispagestyle{empty} % erzeugt Seite ohne Kopf- / Fusszeile
+	% \mbox{}
+	% \newpage
+	
+	% römische Nummerierung
+	\pagenumbering{roman}
+	
+	% Beginne Nummerierung bei 1
+	\setcounter{page}{0}
+	% Beginne Deckblatt
+	\input{../chapters/00_deckblatt}
+	% Ende Deckblatt
+	
+	
+	% 1,5 facher Zeilenabstand
+	% \onehalfspacing
+	
+	% einfacher Zeilenabstand
+	\singlespacing
+	
+	% Inhaltsverzeichnis anzeigen
+	\newpage
+	\tableofcontents
+	
+	% Hier kann noch ein Abstrakt und ein Abkürzungsverzeichnis rein.
+	
+	% Neue Seite
+	\newpage
+	% Beginne ab hier mit lateinischer Nummerierung
+	\pagenumbering{arabic}
+	
+	% Beginne Seiten Nummerierung bei 1
+	\setcounter{page}{1}
+	
+	% Neue Seite
+	\newpage
+	% Überschreibe Kopfzeile 
+	\fancyhead[L]{\nouppercase{\leftmark}} %Kopfzeile links
+	
+	% 1,5 facher Zeilenabstand
+	\onehalfspacing
+	
+	% einzelne Abschnitte
+	
+	% Leerseite
+	\newpage \addtocounter{page}{-1}
+	\thispagestyle{empty} 
+	\mbox{}
+	
+	% Beginne Einleitung
+	% Neue Seite
+	\newpage
+	\section{Ist Zustand}
+	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor ö ä ü sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+	
+	\newpage
+	\section{Soll Zustand}
+	Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+	
+	\newpage
+	\section{Motivation}
+	Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+	
+	\newpage
+	\section{Technologie}
+	Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+	
+	\newpage
+	\section{Arbeitspacket}
+	Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.
+
+\end{document}

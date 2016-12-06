@@ -1,0 +1,18 @@
+% Kopf- und Fusszeile erzeugen
+% erstelle eigenen Seitenstil
+\pagestyle{fancy}
+
+% bereinige Kopf- und Fusszeilenfelder
+\fancyhf{}
+
+% Kopfzeile
+\fancyhead[L]{\nouppercase{\leftmark}} % Kopfzeile Links
+\fancyhead[C]{} % Kopfzeile Mitte
+%\fancyhead[R]{\thepage} % Kopfzeile Rechts
+\renewcommand{\headrulewidth}{0.4pt} % Trennlinie oben
+
+% Fußzeile
+% \fancyfoot[L]{} % Fußzeile Links
+% \fancyfoot[C]{\thepage} % Fußzeile Mitte
+\fancyfoot[R]{\thepage} % Fußzeile Rechts
+% \renewcommand{\footrulewidth}{0.4pt} % Trennlinie Unten
