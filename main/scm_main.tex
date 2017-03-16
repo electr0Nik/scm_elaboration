@@ -81,5 +81,25 @@ ngerman,			% weiterleitung von deutscher Gramatik an andere Pakete
 	
 	% Beginn Module SAP APO
 	\input{../chapters/30_Kapitel_3}
+	
+	
+	 % Beginne mit Anhang
+	\newpage
+	% Abbilungsverzeichnis ins Inhaltsverzeichnis aufnehmen
+	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+	\fancyhead[L]{Abbildungs- / Tabellen- / Listingverzeichnis}
+	% Abbildungsverzeichnis anzeigen
+	\listoffigures
+
+	\newpage
+	% Literaturliste soll im Inhaltsverzeichnis auftauchen
+	\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+	% Literaturverzeichnis anzeigen
+	\renewcommand\refname{Literaturverzeichnis}
+	\fancyhead[L]{\nouppercase{\leftmark}} 
+	\bibliography{../chapters/99_literature}
+	% Stil und Art der Zitierung
+	\bibliographystyle{alphadin} % deutsch, Sortierung nach Kürzel des Autors, Referenz nach Kürzel des Autors und Jahreszahl
+	% Ende Anhang
 
 \end{document}
