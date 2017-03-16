@@ -57,3 +57,12 @@
 
 % Paket für Boxen im Text
 \usepackage{fancybox}
+
+% fußzeile nummerierung nicht reseten
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+% override numbering of sections
+\usepackage{titlesec}
+% set depth to 4; 1. chapter -> 1.1 section -> 1.1.1 subsection -> 1.1.1.1 subsubsection -> 1.1.1.1.1 paragraph
+\setcounter{secnumdepth}{4}
