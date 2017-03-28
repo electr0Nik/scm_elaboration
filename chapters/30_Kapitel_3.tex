@@ -6,4 +6,45 @@ Die Planungslandschaft in SAP APO lässt sich in mehrere Funktionsmodulen untert
 	\item Production Planning/Detailed Scheduling (PP/DS)
 	\item Global Available-to-Promise (ATP)
 	\item Transport Load Builder (TLB)
-\end{itemize} 
+\end{itemize}
+
+\section{Demand Planning (DP)}
+
+\subsection{Konstantmodell}
+Das vom Demand Plannung Tool zur Verfügung gestellte Konstantmodell ist die exponentielle Glättung 1. Ordnung. Für dieses Prognosemodell werde folgende Größen benötigt:
+\begin{enumerate}
+	\item den aktuellen Zeitreichenwert \(x_{(t)}\)
+	\item der letzte Vergangenheitswert \(x_{(t-1)}\)
+	\item sowie der Glättungsfaktor Alpha (\(\alpha\))
+\end{enumerate}
+Die Formel zu Berechnung einer Periode lautet:
+\newline
+$x_{(t+1)} = \alpha * x_{(t)} + (1 - \alpha) * x^*_{(t-1)} $
+\newline
+Im Gegensatz zum gleitenden Mittel werden alle beobachteten Werte mit dem Glättungsfaktor versehen. Dieser steuert die Gewichtung der einzelnen Werte und gibt an ob der Schwerpunkt in den vergangenen Werten liegt oder in den neueren.
+Um mehrere Vergangenheitswerte in die Formel einfließen zu lassen, wir der letzte Teil des mathematischen Ausdrucks um eine Rekursion erweitert:
+\newline
+$ (1 - \alpha) * x_{(t-1)} + \alpha(1 - \alpha)^{2} * x_{(t-2)} + ... + \alpha(1 - \alpha)^{t-1} * x_{1} + (1-a)^t * x_0 $
+\newline
+Werden mehrere vergangene Werte in die Formel eingefügt, dann nimmt deren Gewichtung exponentiell ab. Wird als Beispiel der Alpha Faktor 0,5 gewählt, so werden die Vergangenheitswerte wie folgt bewertet:
+\begin{itemize}
+	\item 1. Vergangenheitswert 50 \%
+	\item 2. Vergangenheitswert 25 \%
+	\item 3. Vergangenheitswert 12,5 \%
+	\item 4. Vergangenheitswert 6,25 \%
+\end{itemize}
+Der Alpha Faktor kann einen Wert in folgendem Bereich annehmen:
+$ 0 \leq \alpha \leq 1 $
+Mit diesem Wissen lässt sich für die Wahl des Alpha Faktors folgenden herleiten:
+Wird $\alpha$ niedrig gewählt, dann verschiebt sich die Gewichtung auf vergangene Werte. Ein großer Alpha Wert jedoch gewichtet die Werte der heutigen und jüngsten Vergangenheit stärker. Das liegt daran, dass durch den exponentiellen Verfall der Formel diese schneller an Gewichtung verlieren. Ein kleiner Alpha Wert hat zur Folge, dass Zufallsschwankungen eher gedämpft werden und erhöht die Stabilität der Prognose.
+
+\subsection{Lineare Regression}
+Das Trendmodell setzt, wie im Namen schon angedeutet, einen Trend in den beobachteten Vergangenheitswerten voraus. Durch die vergangenen Werte wird eine Gerade gezogen. Diese Vorgehensweise zu Bestimmung der Trendgerade ist die der Kleinsten Quadrate (KQ).
+
+
+
+\subsection{Saisonmodell}
+
+\subsection{Trendsaisonmodell}
+
+\subsection{Sporadisches/unregelmäßiges Modell}
