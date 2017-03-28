@@ -11,21 +11,21 @@ Die Planungslandschaft in SAP APO lässt sich in mehrere Funktionsmodulen untert
 \section{Demand Planning (DP)}
 
 \subsection{Konstantmodell}
-Das vom Demand Plannung Tool zur Verfügung gestellte Konstantmodell ist die exponentielle Glättung 1. Ordnung. Für dieses Prognosemodell werde folgende Größen benötigt:
+Das vom Demand Plannung Tool zur Verfügung gestellte Konstantmodell ist die exponentielle Glättung 1. Ordnung. Für dieses Prognosemodell werde folgende Größen benötigt \cite[S.~138~ff]{Stadtler:2010:SCM:1965255}:
 \begin{enumerate}
 	\item den aktuellen Zeitreichenwert \(x_{(t)}\)
 	\item der letzte Vergangenheitswert \(x_{(t-1)}\)
 	\item sowie der Glättungsfaktor Alpha (\(\alpha\))
 \end{enumerate}
 Die Formel zu Berechnung einer Periode lautet:
-\newline
-$x_{(t+1)} = \alpha * x_{(t)} + (1 - \alpha) * x^*_{(t-1)} $
-\newline
+\begin{equation}
+	x_{(t+1)} = \alpha * x_{(t)} + (1 - \alpha) * x^*_{(t-1)} 
+\end{equation}
 Im Gegensatz zum gleitenden Mittel werden alle beobachteten Werte mit dem Glättungsfaktor versehen. Dieser steuert die Gewichtung der einzelnen Werte und gibt an ob der Schwerpunkt in den vergangenen Werten liegt oder in den neueren.
 Um mehrere Vergangenheitswerte in die Formel einfließen zu lassen, wir der letzte Teil des mathematischen Ausdrucks um eine Rekursion erweitert:
-\newline
-$ (1 - \alpha) * x_{(t-1)} + \alpha(1 - \alpha)^{2} * x_{(t-2)} + ... + \alpha(1 - \alpha)^{t-1} * x_{1} + (1-a)^t * x_0 $
-\newline
+\begin{equation}
+(1 - \alpha) * x_{(t-1)} + \alpha(1 - \alpha)^{2} * x_{(t-2)} + ... + \alpha(1 - \alpha)^{t-1} * x_{1} + (1-a)^t * x_0
+\end{equation}
 Werden mehrere vergangene Werte in die Formel eingefügt, dann nimmt deren Gewichtung exponentiell ab. Wird als Beispiel der Alpha Faktor 0,5 gewählt, so werden die Vergangenheitswerte wie folgt bewertet:
 \begin{itemize}
 	\item 1. Vergangenheitswert 50 \%
@@ -40,10 +40,38 @@ Wird $\alpha$ niedrig gewählt, dann verschiebt sich die Gewichtung auf vergange
 
 \subsection{Lineare Regression}
 Das Trendmodell setzt, wie im Namen schon angedeutet, einen Trend in den beobachteten Vergangenheitswerten voraus. Durch die vergangenen Werte wird eine Gerade gezogen. Diese Vorgehensweise zu Bestimmung der Trendgerade ist die der Kleinsten Quadrate (KQ).
+Die Position der Gerade wird so bestimmt, das die Summe der Abweichungsquadrate, zwischen den beobachteten Werten und Gerade minimal sind. Die zu ermittelnde Funktion hat die Form \cite{schwarze2009}:
+\begin{equation}
+	f(x) = a + bx
+\end{equation}
+Die zwei Koeffizienten, a und b, lassen sich mit den folgenden zwei Funktionen ermitteln:
+\begin{equation}
+	a = \dfrac{\Sigma x^{2}_{i} \Sigma y_{i} - \Sigma x_{i} \Sigma x_{i}y_{i}}{n \Sigma x^{2}_{i} - (\Sigma x_{i})^{2}}
+\end{equation}
 
-
+\begin{equation}
+	b = \dfrac{n\Sigma x_{i}y_{i} - \Sigma x_{i} \Sigma y_{i}}{n \Sigma x^{2}_{i} - (\Sigma x_{i})^{2}}
+\end{equation}
+Die Beschreibung der einzelnen mathematischen Zeichen lautet wie folgt:
+\begin{itemize}
+	\item \(x_{i}\) = Periode an der Stelle i
+	\item \(y_{i}\) = Absatz in der Periode i
+	\item n = Anzahl der betrachteten Perioden
+	\item f(x) = Lineare KQ-Regressionsfunktion
+\end{itemize}
+Nachdem die Regressionsfunktion ermittelt wurde, kann die Prognose für einen beliebigen Zukunftswert durchgeführt werden. Dazu muss "f(x)" durch die gewünschte Periode ersetzt und die Funktion nach "x" aufgelöst werden.
 
 \subsection{Saisonmodell}
+Saisonale Absatzmodelle sind Gütern zuzuordnen, welche aufgrund der Jahreszeit in ihrem Absatz schwanken. Das können Kleidungsartikel (Wintermode), Speisen (Spargel) oder Reisen (Karibikurlaub) sein um einige Beispiele zu nennen.
+Um saisonale Einflüsse erkennen zu können, müssen die Vergangenheitswerte auf folgende Merkmale hin untersucht werden \cite[S.~25]{Larouque2010}:
+\begin{itemize}
+	\item Regelmäßige Schwankungen zu bestimmten Zeiten des Jahres/Quartals/Monats
+	\item Äußere Einflüsse sind maßgebend für den Bedarf (Weihnachten, Urlaub, etc.)
+	\item Bedarfsspitzen und -täler müssen in einem vergleichbarem Zeitraum (Periode) stattfinden. Das gilt der Abgrenzung von zufälligen Schwankungen
+	\item Eine Schwankung muss einem eindeutigem Anlasse vorliegen, der auch in Zukunft bestand hat.
+	\item Die Abweichung muss bedeutend größer sein als die zufälligen Schwankungen
+\end{itemize}
+Aus den oben genannten Gründen ist es wichtig, dass ein saisonaler Bedarf erst bei Betrachtung mehrerer Saisonzeiträume (mindestens zwei) möglich ist.
 
 \subsection{Trendsaisonmodell}
 
