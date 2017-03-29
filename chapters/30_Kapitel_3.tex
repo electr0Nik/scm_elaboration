@@ -59,7 +59,7 @@ Die Beschreibung der einzelnen mathematischen Zeichen lautet wie folgt:
 	\item n = Anzahl der betrachteten Perioden
 	\item f(x) = Lineare KQ-Regressionsfunktion
 \end{itemize}
-Nachdem die Regressionsfunktion ermittelt wurde, kann die Prognose für einen beliebigen Zukunftswert durchgeführt werden. Dazu muss "f(x)" durch die gewünschte Periode ersetzt und die Funktion nach "x" aufgelöst werden.
+Nachdem die Regressionsfunktion ermittelt wurde, kann die Prognose für einen beliebigen Zukunftswert durchgeführt werden. Dazu muss "'f(x)"' durch die gewünschte Periode ersetzt und die Funktion nach "'x"' aufgelöst werden.
 
 \subsection{Saisonmodell}
 Saisonale Absatzmodelle sind Gütern zuzuordnen, welche aufgrund der Jahreszeit in ihrem Absatz schwanken. Das können Kleidungsartikel (Wintermode), Speisen (Spargel) oder Reisen (Karibikurlaub) sein um einige Beispiele zu nennen.
@@ -72,6 +72,45 @@ Um saisonale Einflüsse erkennen zu können, müssen die Vergangenheitswerte auf
 	\item Die Abweichung muss bedeutend größer sein als die zufälligen Schwankungen
 \end{itemize}
 Aus den oben genannten Gründen ist es wichtig, dass ein saisonaler Bedarf erst bei Betrachtung mehrerer Saisonzeiträume (mindestens zwei) möglich ist.
+
+Dieses Modell wird gewählt, wenn die saisonalen Schwankungen sich um einen konstanten Grundwert bewegen. Die Prognose kann mit den Alpha- und Gamma-Werten beeinflusst werden. Diese glätten jeweils den Grundwert, sowie die Saisonkomponente.
+Die Berechnung erfolgt durch die Multiplikation von Saisonindex und des Grundwertes. 
+SAP benutzt dazu eine Modifikation des Holt-Winters Verfahren mit der exponentiellen Glättung 1. Ordnung \cite{SAPDOCTSM}.
+
+Die Berechnung des Grundwertes lautet wie folgt:
+\begin{equation}
+	G_{(t)} = G_{(t-1) }+ T_{(t-1)} + \alpha \big[\dfrac{V_{(t)}}{S_{(t-L)}} - G_{(t-1)} - T_{(t-1}) \big]
+\end{equation}
+Die einzelnen Variablen lauten:
+\begin{itemize}
+	\item $G_{(t)}$ = Der aktuelle Grundwert für die laufende Periode (t)
+	\item $G_{(t - 1)}$ = Der alte Grundwert aus der Vorperiode
+	\item $T_{(t - 1)}$ = Alter Trendwert aus der vergangenen Periode
+	\item $V_{(t)}$ = Ist-Bedarf für die laufende Periode (t)
+	\item L = Periodenlänge (Standard = 12)
+	\item $S_{(t - L)}$ = Alter Saisonindex für die Periode (t)
+\end{itemize}
+
+Die Berechnung des Saisonindex lautet wie folgt:
+\begin{equation}
+	S_{t} = S_{t-L} + \gamma \big[\dfrac{V_{t}}{G_{t}} - S_{t-L} \big]
+\end{equation}
+Da nur der Saisonwert in die Gleichung einfließen darf, gelten folgende Restriktionen:
+\begin{itemize}
+	\item $T_{t} = 0$
+	\item $\beta = 0$	
+\end{itemize}
+Der Glättungsfaktor für den Grundwert "'G"' und Saisonindex "'S"' beläuft sich auf $0 < \alpha, \gamma < 1$.
+
+Um nun eine Prognosewert für die darauffolgende Periode zu berechnen wird folgende Formel benötigt:
+\begin{equation}
+	P_{t+1} = G_{t} * S_{t-L+i}
+\end{equation}
+Die neuen Variablen lauten wie folgt:
+\begin{itemmize}
+	\item $P_{t+1}$ = Berechnete Prognose
+	\item i = Prognosehorizont (angelehnt an die Länge der Saison)
+\end{itemmize}
 
 \subsection{Trendsaisonmodell}
 \subsection{Sporadisches/unregelmäßiges Modell}
