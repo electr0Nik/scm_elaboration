@@ -62,6 +62,7 @@ Die Beschreibung der einzelnen mathematischen Zeichen lautet wie folgt:
 Nachdem die Regressionsfunktion ermittelt wurde, kann die Prognose für einen beliebigen Zukunftswert durchgeführt werden. Dazu muss "'f(x)"' durch die gewünschte Periode ersetzt und die Funktion nach "'x"' aufgelöst werden.
 
 \subsection{Saisonmodell}
+\label{sec:Saisonmodell}
 Saisonale Absatzmodelle sind Gütern zuzuordnen, welche aufgrund der Jahreszeit in ihrem Absatz schwanken. Das können Kleidungsartikel (Wintermode), Speisen (Spargel) oder Reisen (Karibikurlaub) sein um einige Beispiele zu nennen.
 Um saisonale Einflüsse erkennen zu können, müssen die Vergangenheitswerte auf folgende Merkmale hin untersucht werden \cite[S.~25]{Larouque2010}:
 \begin{itemize}
@@ -84,39 +85,50 @@ Die Berechnung des Grundwertes lautet wie folgt:
 Die einzelnen Variablen lauten:
 \begin{itemize}
 	\item $G_{(t)}$ = Der aktuelle Grundwert für die laufende Periode (t)
-	\item $G_{(t - 1)}$ = Der alte Grundwert aus der Vorperiode
-	\item $T_{(t - 1)}$ = Alter Trendwert aus der vergangenen Periode
+	\item $G_{(t-1)}$ = Der alte Grundwert aus der Vorperiode
+	\item $T_{(t-1)}$ = Alter Trendwert aus der vergangenen Periode
 	\item $V_{(t)}$ = Ist-Bedarf für die laufende Periode (t)
 	\item L = Periodenlänge (Standard = 12)
-	\item $S_{(t - L)}$ = Alter Saisonindex für die Periode (t)
+	\item $S_{(t-L)}$ = Alter Saisonindex für die Periode (t)
 \end{itemize}
 
 Die Berechnung des Saisonindex lautet wie folgt:
 \begin{equation}
-	S_{t} = S_{t-L} + \gamma \big[\dfrac{V_{t}}{G_{t}} - S_{t-L} \big]
+	S_{(t)} = S_{(t-L)} + \gamma \big[\dfrac{V_{(t)}}{G_{(t)}} - S_{(t-L)} \big]
 \end{equation}
 Da nur der Saisonwert in die Gleichung einfließen darf, gelten folgende Restriktionen:
 \begin{itemize}
-	\item $T_{t} = 0$
+	\item $T_{(t)} = 0$
 	\item $\beta = 0$	
 \end{itemize}
 Der Glättungsfaktor für den Grundwert "'G"' und Saisonindex "'S"' beläuft sich auf $0 < \alpha, \gamma < 1$.
 
 Um nun eine Prognosewert für die darauffolgende Periode zu berechnen wird folgende Formel benötigt:
 \begin{equation}
-	P_{t+1} = G_{t} * S_{t-L+i}
+	P_{(t+1)} = G_{(t)} * S_{(t-L+i)}
 \end{equation}
 Die neuen Variablen lauten wie folgt:
-\begin{itemmize}
-	\item $P_{t+1}$ = Berechnete Prognose
+\begin{itemize}
+	\item $P_{(t+1)}$ = Berechnete Prognose
 	\item i = Prognosehorizont (angelehnt an die Länge der Saison)
-\end{itemmize}
+\end{itemize}
 
 \subsection{Trendsaisonmodell}
+Das Trendsaisonmodell verbindet die beiden vorherigen Modelle. Dadurch wird nicht nur Trend, sonder auch eine Saisonelle Schwankung mit einbezogen ins Modell.
+Wie schon beim Saisonmodell verwendet SAP das Holt-Winter Verfahren. Dieses wird um den Trend hin erweitert. Das hat zur Folge, dass neben dem Alpha und Gamma Faktor auch der Beta Glättungsfaktor eingeführt wird, welcher den Trend glättet. Die Berechnung aus \nameref{sec:Saisonmodell} wird um die folgende Gleichung erweitert.
+\begin{equation}
+	T_{(t)} = T_{(t-1)} + \beta \big[G_{(t)} - (G_{(t-1)} + T_{(t-1)}) \big]
+\end{equation}
+Das alle Faktoren in die Gleichung nun einfließen, gibt es keine Restriktionen bezüglich den verwendeten Variablen. Der Glättungsfaktor Beta beläuft sich auf 0 < \beta < 1. Dadurch verändert sich die Zielfunktion in folgendem Maße.
+\begin{equation}
+	P_{(t+1)} = ()G_{(t)} + i * T_{(t)}) * S_{(t-L+i)}
+\end{equation}
+Es macht Sinn die Prognose für kurze Zeiten durchzuführen und die Absatzwerte neu zu berechnen. Durch die Kombination von Saison und Trend kann es vorkommen, dass die Prognosedaten in der Zukunft ungenauer werden.
+
 \subsection{Sporadisches/unregelmäßiges Modell}
+Das letzte hier vorgestellte Model, stellt einen sporadischen Bedarf vor. Sporadisch heißt in diesem Fall, dass keine erkennbare Systematik hinter den Bedarfen liegt. Ersatzteile für Autos können hierbei als gutes Beispiel herangezogen werden.
 
 \section{Supply Network Planning}
-\cite[S.~169~ff]{Witt:2014:GrundkursSAPAPO}
 \section{Production Planning and Detailed Scheduling}
 \section{Global Available-to-Promise}
 \section{Transport Load Builder}
