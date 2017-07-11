@@ -49,6 +49,11 @@
 	\tableofcontents
 	
 	% Hier kann noch ein Abstrakt und ein Abkürzungsverzeichnis rein.
+  \newpage
+  % Abkürzungsverzeichnis ins Inhaltsverzeichnis aufnehmen
+  \addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+  \fancyhead[L]{Abkürzungsverzeichnis}
+  \input{../chapters/01_abkuerzungsverz}
 	
 	% Neue Seite
 	\newpage
@@ -81,8 +86,6 @@
 	
 	% Beginn Module SAP APO
 	\input{../chapters/30_Kapitel_3}
-	
-	Platzhaltertext mit Zitat\cite[S.~50~ff]{Witt:2014:GrundkursSAPAPO}
 	
 	\begin{figure}[htbp]
 		\centering

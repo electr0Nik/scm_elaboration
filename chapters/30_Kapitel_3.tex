@@ -1,134 +1,64 @@
-\chapter{Die Module des SAP APO-Systems}
-Die Planungslandschaft in SAP APO lässt sich in mehrere Funktionsmodulen unterteilen:
+\chapter{Generelle Reflexion}
+Das folgende Kapitel stellt meine Reflexion zum Thema Supply Chain Management in Verbindung mit dem SAP System, insbesondere der SAP \ac{APO} Komponente dar. Die Reflexion gliedert sich in die Abschnitte Voraussetzungen, Alternative und mögliche Lösung. Jeder Abschnitt beginnt mit einer Fragestellung und versucht im Anschluss diese zu beantworten.
+Die Reflexion beginnt mit dem Ziel und den \textbf{Herausforderungen} eines \ac{SCM}. Beim Abschnitt \textbf{Voraussetzungen} soll kurz ein zentralistischer \ac{SCM} Ansatz betrachtet werden. Im Abschnitt \textbf{Alternativen} sollen kurz die möglichen Alternativen zu einem zentralistischen Ansatz betrachtet werden und abschließend soll eine mögliche IT-Lösung für das \ac{SCM} beschrieben werden.
+
+\section{Ziele und Herausforderungen des SCM}
+Wie in dem vorherigen Kapitel bereits erwähnt, stellt die Planung und Abbildung von komplexen Produktions- und Lieferprozessen diverse Unternehmen vor unterschiedlich große Herausforderungen. Eine der größeren Probleme ist die Planung, die die gesamte Wertschöpfungs- und Lieferkette berücksichtigt. Besonders wenn Abteilungsgrenzen oder unterschiedliche inkompatible Datensätze vorhanden sind, erschwert das die integrierte Planung.
+Die Ziele und Aufgaben einer \ac{SCM} werden daher breiter gefasst:
 \begin{itemize}
-	\item Demand Planing (DP)
-	\item Supply Network Planning (SNP)
-	\item Production Planning/Detailed Scheduling (PP/DS)
-	\item Global Available-to-Promise (ATP)
-	\item Transport Load Builder (TLB)
+	\item Verkürzung der Liefer- und Durchlaufzeiten
+	\item Erhöhung der Termintreue
+	\item Kosteneinsparung durch optimierte Bestellmengen und Lagerbestände
+	\item Erhöhung der Prognose- und Planungsgenauigkeit
+	\item Minimierung von Produktions- und Lieferzeitverzögerungen
+	\item Vereinheitlichung von Strategien, beispielsweise für Standortplanung, Produkt- und Lieferantenauswahl
+\end{itemize}
+Eins der größten Probleme, vor dem viele Unternehmen stehen, ist die Einführung einer \ac{SCM}. Zum einen fehlt das Know-How, zum anderen fehlt es an geeignetem Personal und an der entsprechenden Infrastruktur. Typischerweise wird eine Beratungs- und Implementierungshilfe in Anspruch genommen, die das Unternehmen während der gesamten Einführungsphasen bis zur Inbetriebnahme begleitet. Darüber hinaus müssen die Mitarbeiter des entsprechenden Unternehmens zur Einführung des \ac{SCM} bereit sein. Dazu gehört neben den organisatorischen Voraussetzungen, wie Prozessorientierung und Transparenz auch ein vollumfassender Informationsaustausch.
+Das Problem von umfassender \ac{SCM} liegt in den verschwimmenden Grenzen der Abteilungen und Unternehmen. Zum einen wird die Verteilung des erwirtschafteten Gewinns verschleiert, was zu Konflikten mit den \ac{SCM} Partnerunternehmen führt. Zum anderen können \ac{SCM} Partner insolvent werden und durch die verschwommenen Grenzen, lässt sich nicht eindeutig festmachen, wer die anfallenden Kosten tragen muss. Darüber hinaus ergeben sich die folgenden Punkte als weitere Herausforderungen für ein funktionierendes \ac{SCM}:
+\begin{itemize}
+	\item Ganzheitliche Steuerung und Entscheidungen über multiple Standorte hinweg, wodurch die jeweiligen Standorte an Bedeutung verlieren
+	\item Erhöhte Komplexität und Steuerungsaufwand, da unternehmensspezifische Prozesse und Abläufe mit dem Unternehmen gewachsen sind
+	\item Unternehmensübergreifenden Prozesse, als Voraussetzung für Änderungen oder Neudefinition von Prozessen
+	\item Prozessmodellierung, um bestehende Prozesse effizienter zu gestalten und Optimierungspotenziale zu erkennen
+	\item Vollständige Transparenz bei Ressourcen und Kapazitäten, da andernfalls die Planung nicht zentral ausgeführt werden kann. 
+	\item Interkompatibilität zwischen den Produktionstechnologien der \ac{SCM}-Partner, da inkompatible Technologien die Flexibilität verringern und Abhängigkeiten verursachen
+	\item "`Backpressure"` bei \ac{SCM}-Partner in infrastrukturell schwächeren Gegenden. Das führt zu einer Überlastung bei der Datenübertragung, was zu Verlust von Daten und Informationen führen kann
 \end{itemize}
 
-\section{Demand Planning (DP)}
+\section{Voraussetzungen für einen zentralistischen Ansatz}
+Bei einer ganzheitlichen Lösung die übergreifend für alle Standorte plant, handelt es sich um einen zentralistischen Ansatz des \ac{SCM}.
+Dabei befindet sich die \ac{SCM} an einem bestimmten Standort, der Teil der \ac{SC} ist. Dabei sind sämtliche \ac{ERP}-Systeme der \ac{SC} mit dem \ac{SCM} gekoppelt, damit die Bedarfs- und Verfügbarkeitsprüfung über die gesamte Supply Chain erstellt werden kann.
+Dabei muss sichergestellt werden, dass die Daten in einem bestimmten Format gesendet und empfangen werden, damit mit diesen Daten sinnvoll weitergearbeitet wird. Wie im vorherigen Kapitel bereits angerissen, nutzt das SAP \ac{ERP} System das Core Interface \cite{scm:cif_10} um zwischen dem SAP \ac{ERP} und SAP \ac{APO} System die Daten auszutauschen.
+Werden zusätzlich nicht SAP System angeschlossen, so bietet SAP die Möglichkeit mittels \ac{BAPI}’s eigenen Schnittstellen zu entwickeln und den angeschlossenen Systemen zur Verfügung zu stellen. 
+Abseits der Integration der Daten und Definition und Erstellung von Schnittstellen, ist auch die Transparenz ein Problem von zentralistischen Lösungen. Jeder \ac{SCM}-Partner muss seinen Daten für alle freigeben. Dabei müssen die Unternehmen darauf vertrauen, dass kein Missbrauch betrieben wird. Zusätzlich zum Vertrauen spielen auch Sicherheitsaspekte eine übergeordnete Rolle. 
+Gerade beim Transfer der Daten über das Internet, muss die Sicherheit und Integrität der Daten gewährleistet werden. Manipulierte Daten liefern keine korrekten Ergebnisse, was sich auf die gesamte \ac{SC} auswirken kann und negativen Einfluss auf die Qualität der Prognose hat. 
+Werden nicht SAP System angeschlossen, gehören zusätzlich zur Definition der Daten und Schnittstellen, auch ein Mapping der Daten auf das Zielsystem. Sind die Begrifflichkeiten nicht eindeutig definiert, werden die Daten gegebenenfalls falsch interpretiert und verarbeitet, was sich wiederrum in einer schlechten Qualität wiederspiegelt. Für gewöhnlich werden die Informationen zur Zuordnung vom SAP System bereitgestellt und müssen von den angeschlossenen Systemen importiert und verarbeitet werden (Stichwort: Web-Services mit SOAP und WSDL).
+Dadurch das, zum einen die Schnittstellen definiert, die Daten bereitgestellt und zum anderen ein Mapping generiert werden muss, ist die Anbindung weitere Unternehmen mit nicht unerheblichem Aufwand verbunden. Dabei entsteht der Aufwand beim Unternehmen das angebunden werden soll, sowie beim Unternehmen, in das eingebunden wird. Um diesen Aufwand zu rechtfertigen sollte bereits ein längere Beziehung oder Partnerschaft zwischen den Unternehmen bestehen.
 
-\subsection{Konstantmodell}
-Das vom Demand Plannung Tool zur Verfügung gestellte Konstantmodell ist die exponentielle Glättung 1. Ordnung. Für dieses Prognosemodell werde folgende Größen benötigt \cite[S.~138~ff]{Stadtler:2010:SCM:1965255}:
-\begin{enumerate}
-	\item den aktuellen Zeitreichenwert \(x_{(t)}\)
-	\item der letzte Vergangenheitswert \(x_{(t-1)}\)
-	\item sowie der Glättungsfaktor Alpha (\(\alpha\))
-\end{enumerate}
-Die Formel zu Berechnung einer Periode lautet:
-\begin{equation}
-	x_{(t+1)} = \alpha * x_{(t)} + (1 - \alpha) * x^*_{(t-1)} 
-\end{equation}
-Im Gegensatz zum gleitenden Mittel werden alle beobachteten Werte mit dem Glättungsfaktor versehen. Dieser steuert die Gewichtung der einzelnen Werte und gibt an ob der Schwerpunkt in den vergangenen Werten liegt oder in den neueren.
-Um mehrere Vergangenheitswerte in die Formel einfließen zu lassen, wir der letzte Teil des mathematischen Ausdrucks um eine Rekursion erweitert:
-\begin{equation}
-(1 - \alpha) * x_{(t-1)} + \alpha(1 - \alpha)^{2} * x_{(t-2)} + ... + \alpha(1 - \alpha)^{t-1} * x_{1} + (1-a)^t * x_0
-\end{equation}
-Werden mehrere vergangene Werte in die Formel eingefügt, dann nimmt deren Gewichtung exponentiell ab. Wird als Beispiel der Alpha Faktor 0,5 gewählt, so werden die Vergangenheitswerte wie folgt bewertet:
-\begin{itemize}
-	\item 1. Vergangenheitswert 50 \%
-	\item 2. Vergangenheitswert 25 \%
-	\item 3. Vergangenheitswert 12,5 \%
-	\item 4. Vergangenheitswert 6,25 \%
-\end{itemize}
-Der Alpha Faktor kann einen Wert in folgendem Bereich annehmen:
-$ 0 \leq \alpha \leq 1 $
-Mit diesem Wissen lässt sich für die Wahl des Alpha Faktors folgenden herleiten:
-Wird $\alpha$ niedrig gewählt, dann verschiebt sich die Gewichtung auf vergangene Werte. Ein großer Alpha Wert jedoch gewichtet die Werte der heutigen und jüngsten Vergangenheit stärker. Das liegt daran, dass durch den exponentiellen Verfall der Formel diese schneller an Gewichtung verlieren. Ein kleiner Alpha Wert hat zur Folge, dass Zufallsschwankungen eher gedämpft werden und erhöht die Stabilität der Prognose.
+\section{Alternativen zum zentralistischen Ansatz}
+Wie im vorherigen Abschnitt beschrieben, ist der zentralistische Ansatz mit vielen Einschränkungen und Aufwänden verbunden. Besonders wenn  ein Partner angebunden wird, muss die Produktion und die Strategie des Partners übernommen oder angepasst werden. Dieser Aufwand fällt für jeden neuen Partner, beziehungsweise jedes neue Unternehmen erneut an, da die Strategien nicht pauschal übernommen werden können, und stets angepasst werden müssen.
+Eine potentielle Alternative dazu stellt das Konsignationslager \cite[vgl. mit]{wiki:konsig_17_11} dar. Wie in \ref{fig:desc_netzwerk} zu sehen ist, werden diese Lager, von ein oder mehrere \ac{SCM}-Partnern, in der Nähe zum Kunden betrieben.
 
-\subsection{Lineare Regression}
-Das Trendmodell setzt, wie im Namen schon angedeutet, einen Trend in den beobachteten Vergangenheitswerten voraus. Durch die vergangenen Werte wird eine Gerade gezogen. Diese Vorgehensweise zu Bestimmung der Trendgerade ist die der Kleinsten Quadrate (KQ).
-Die Position der Gerade wird so bestimmt, das die Summe der Abweichungsquadrate, zwischen den beobachteten Werten und Gerade minimal sind. Die zu ermittelnde Funktion hat die Form \cite{schwarze2009}:
-\begin{equation}
-	f(x) = a + bx
-\end{equation}
-Die zwei Koeffizienten, a und b, lassen sich mit den folgenden zwei Funktionen ermitteln:
-\begin{equation}
-	a = \dfrac{\Sigma x^{2}_{i} \Sigma y_{i} - \Sigma x_{i} \Sigma x_{i}y_{i}}{n \Sigma x^{2}_{i} - (\Sigma x_{i})^{2}}
-\end{equation}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../pics/scm_komponent}
+	\caption{Dezentrales SC-Netzwerk \cite{scm:grafik_decentr_lager_13}}
+	\label{fig:desc_netzwerk}
+\end{figure}
 
-\begin{equation}
-	b = \dfrac{n\Sigma x_{i}y_{i} - \Sigma x_{i} \Sigma y_{i}}{n \Sigma x^{2}_{i} - (\Sigma x_{i})^{2}}
-\end{equation}
-Die Beschreibung der einzelnen mathematischen Zeichen lautet wie folgt:
-\begin{itemize}
-	\item \(x_{i}\) = Periode an der Stelle i
-	\item \(y_{i}\) = Absatz in der Periode i
-	\item n = Anzahl der betrachteten Perioden
-	\item f(x) = Lineare KQ-Regressionsfunktion
-\end{itemize}
-Nachdem die Regressionsfunktion ermittelt wurde, kann die Prognose für einen beliebigen Zukunftswert durchgeführt werden. Dazu muss "'f(x)"' durch die gewünschte Periode ersetzt und die Funktion nach "'x"' aufgelöst werden.
+Das weiterhin \ac{SC} Teilnehmen verbunden sind, kann durch diese die Informationsverarbeitung durchgeführt und an alle Beteiligte verteilt werden. Dadurch soll, bei unerwarteten Ausfällen innerhalb der \ac{SC}, das System alle nötigen Informationen an die Beteiligten weiterleiten, damit diese die Produktionsplanung entsprechend anpassen können.
+Wichtig bei dezentralen Systemen ist, dass sich alle beteiligten Systeme dynamisch an die geänderte Situation anpassen und entsprechenden reagieren können. Dazu gehört, dass auch die Planung, Verwaltung und Steuerung der Ressourcen schnell angepasst werden können. Dabei dürfen die Konditionen bezüglich der Liefertermine, Mengen und Qualität nicht vernachlässigt werden.
+Die Abbildung 4 zeigt den Prozess mit einem Konsignationslager beim Kunden. Das Lager des Kunden wird vom Lieferanten befüllt. Sobald der Kunde ein Bedarf für ein Produkt erkennt, entnimmt er es aus dem Konsignationslager. Dabei wird ein Warenausgang gebucht und der Lieferant wird darüber informiert. Anschließend stellt dieser eine Rechnung an den Kunden und befüllt das Lager erneut.
+Der Vorteil bei diesem Vorgang, ist das dem Kunden der genaue Bedarf und der Zeitpunkt, an dem er gebraucht wird nicht bekannt sein müssen. Der Lieferant hingegeben hat den Vorteil, dass er sich seine Produktionskapazitäten frei einteilen kann. Er muss lediglich sicherstellen, dass sich im Konsignationslager beim Kunden stets ausreichend Teile befinden. Zusätzlich muss nicht das gesamte System an das \ac{SCM} angeschlossen sein. Das hat insbesondere dann den Vorteil, wenn die Partner sich nicht lange kennen, zwischen ihnen noch keine Partnerschaft besteht oder der Aufwand für die Einführung eines \ac{SCM} als zu groß angesehen wird.
 
-\subsection{Saisonmodell}
-\label{sec:Saisonmodell}
-Saisonale Absatzmodelle sind Gütern zuzuordnen, welche aufgrund der Jahreszeit in ihrem Absatz schwanken. Das können Kleidungsartikel (Wintermode), Speisen (Spargel) oder Reisen (Karibikurlaub) sein um einige Beispiele zu nennen.
-Um saisonale Einflüsse erkennen zu können, müssen die Vergangenheitswerte auf folgende Merkmale hin untersucht werden \cite[S.~25]{Larouque2010}:
-\begin{itemize}
-	\item Regelmäßige Schwankungen zu bestimmten Zeiten des Jahres/Quartals/Monats
-	\item Äußere Einflüsse sind maßgebend für den Bedarf (Weihnachten, Urlaub, etc.)
-	\item Bedarfsspitzen und -täler müssen in einem vergleichbarem Zeitraum (Periode) stattfinden. Das gilt der Abgrenzung von zufälligen Schwankungen
-	\item Eine Schwankung muss einem eindeutigem Anlasse vorliegen, der auch in Zukunft bestand hat.
-	\item Die Abweichung muss bedeutend größer sein als die zufälligen Schwankungen
-\end{itemize}
-Aus den oben genannten Gründen ist es wichtig, dass ein saisonaler Bedarf erst bei Betrachtung mehrerer Saisonzeiträume (mindestens zwei) möglich ist.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../pics/scm_komponent}
+	\caption{Prozess mit Konsignationslager beim Kunden \cite{scm:grafik_kons_best_kunde_14}}
+	\label{fig:kons_prz_kunde}
+\end{figure}
 
-Dieses Modell wird gewählt, wenn die saisonalen Schwankungen sich um einen konstanten Grundwert bewegen. Die Prognose kann mit den Alpha- und Gamma-Werten beeinflusst werden. Diese glätten jeweils den Grundwert, sowie die Saisonkomponente.
-Die Berechnung erfolgt durch die Multiplikation von Saisonindex und des Grundwertes. 
-SAP benutzt dazu eine Modifikation des Holt-Winters Verfahren mit der exponentiellen Glättung 1. Ordnung \cite{SAPDOCTSM}.
+\section{Möglich Lösung}
+Für eine mögliche IT Umsetzung eines \ac{SCM} Systems bietet sich Web-basierte Lösung an. Die \ac{SCM} wird als REST-Service bereitgestellt und ermöglicht den Unternehmen, sich mit ihren Produkten oder Komponenten anzumelden und sie anderen Teilnehmern zum Erwerb anzubieten. Analog zu einem Marktplatz, können die Teilnehmer nach den benötigten Produkten suchen, bei dem Unternehmen anfragen und entsprechend bestellen. Sind beim Unternehmen ausreichend freie Kapazitäten vorhanden, produziert und verschickt das Unternehmen das Produkt an den Besteller. 
+Der Vorteil bei diesem Vorgehen ist die Trennung der festen Bindung zwischen Kunde und Unternehmen, womit auch kein Datenaustausch und standardisierte Schnittstellen benötigt werden.
 
-Die Berechnung des Grundwertes lautet wie folgt:
-\begin{equation}
-	G_{(t)} = G_{(t-1) }+ T_{(t-1)} + \alpha \big[\dfrac{V_{(t)}}{S_{(t-L)}} - G_{(t-1)} - T_{(t-1}) \big]
-\end{equation}
-Die einzelnen Variablen lauten:
-\begin{itemize}
-	\item $G_{(t)}$ = Der aktuelle Grundwert für die laufende Periode (t)
-	\item $G_{(t-1)}$ = Der alte Grundwert aus der Vorperiode
-	\item $T_{(t-1)}$ = Alter Trendwert aus der vergangenen Periode
-	\item $V_{(t)}$ = Ist-Bedarf für die laufende Periode (t)
-	\item L = Periodenlänge (Standard = 12)
-	\item $S_{(t-L)}$ = Alter Saisonindex für die Periode (t)
-\end{itemize}
-
-Die Berechnung des Saisonindex lautet wie folgt:
-\begin{equation}
-	S_{(t)} = S_{(t-L)} + \gamma \big[\dfrac{V_{(t)}}{G_{(t)}} - S_{(t-L)} \big]
-\end{equation}
-Da nur der Saisonwert in die Gleichung einfließen darf, gelten folgende Restriktionen:
-\begin{itemize}
-	\item $T_{(t)} = 0$
-	\item $\beta = 0$	
-\end{itemize}
-Der Glättungsfaktor für den Grundwert "'G"' und Saisonindex "'S"' beläuft sich auf $0 < \alpha, \gamma < 1$.
-
-Um nun eine Prognosewert für die darauffolgende Periode zu berechnen wird folgende Formel benötigt:
-\begin{equation}
-	P_{(t+1)} = G_{(t)} * S_{(t-L+i)}
-\end{equation}
-Die neuen Variablen lauten wie folgt:
-\begin{itemize}
-	\item $P_{(t+1)}$ = Berechnete Prognose
-	\item i = Prognosehorizont (angelehnt an die Länge der Saison)
-\end{itemize}
-
-\subsection{Trendsaisonmodell}
-Das Trendsaisonmodell verbindet die beiden vorherigen Modelle. Dadurch wird nicht nur Trend, sonder auch eine Saisonelle Schwankung mit einbezogen ins Modell.
-Wie schon beim Saisonmodell verwendet SAP das Holt-Winter Verfahren. Dieses wird um den Trend hin erweitert. Das hat zur Folge, dass neben dem Alpha und Gamma Faktor auch der Beta Glättungsfaktor eingeführt wird, welcher den Trend glättet. Die Berechnung aus \nameref{sec:Saisonmodell} wird um die folgende Gleichung erweitert.
-\begin{equation}
-	T_{(t)} = T_{(t-1)} + \beta \big[G_{(t)} - (G_{(t-1)} + T_{(t-1)}) \big]
-\end{equation}
-Das alle Faktoren in die Gleichung nun einfließen, gibt es keine Restriktionen bezüglich den verwendeten Variablen. Der Glättungsfaktor Beta beläuft sich auf 0 < \beta < 1. Dadurch verändert sich die Zielfunktion in folgendem Maße.
-\begin{equation}
-	P_{(t+1)} = ()G_{(t)} + i * T_{(t)}) * S_{(t-L+i)}
-\end{equation}
-Es macht Sinn die Prognose für kurze Zeiten durchzuführen und die Absatzwerte neu zu berechnen. Durch die Kombination von Saison und Trend kann es vorkommen, dass die Prognosedaten in der Zukunft ungenauer werden.
-
-\subsection{Sporadisches/unregelmäßiges Modell}
-Das letzte hier vorgestellte Model, stellt einen sporadischen Bedarf vor. Sporadisch heißt in diesem Fall, dass keine erkennbare Systematik hinter den Bedarfen liegt. Ersatzteile für Autos können hierbei als gutes Beispiel herangezogen werden.
-
-\section{Supply Network Planning}
-\section{Production Planning and Detailed Scheduling}
-\section{Global Available-to-Promise}
-\section{Transport Load Builder}
